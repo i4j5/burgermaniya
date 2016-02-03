@@ -1,4 +1,75 @@
 body 
-  background #f0f0f0
+  background #fbfbfb
   text-align center
   padding-top 50px
+  
+.btn
+  display inline-block
+  font-size 12px
+  line-height 1em
+  padding .8em 1em
+  background #ddd
+  
+.product
+  display none
+  transition all .1s linear
+  &_active
+    display block
+  &__body
+    margin-bottom 14px
+    background #fff
+    padding 10px
+    box-shadow 0px 1px 5px 1px #ddd
+  &__title
+    text-align left 
+    font-size 16px
+    line-height 1.2em
+    margin-bottom 20px
+  
+  &__image
+    margin: 5px auto
+    max-width 100%
+
+#categories
+  margin-bottom 20px      
+.category  
+  cursor pointer
+  display inline-block
+  margin-right 25px
+  margin-bottom 15px
+  //float left
+
+  &__body
+    position relative
+    //background #f6f6f6
+    padding 10px 0px
+  &__title
+    text-align center 
+    margin-left 50px
+    font-size 16px
+    line-height 20px
+    display inline-block
+  
+  &__image
+    position absolute
+    //top -10px
+    //float left
+    //margin: 0 10px
+    top 0
+    left 0
+    width 40px
+    height 40px
+    border-radius 50px
+    border 2px solid #ddd
+  
+  &_active
+    .category__image
+      border 2px solid #d00
+
+.cart
+  position fixed
+  width 80px 
+  height 80px 
+  right 0px 
+  bottom 0px 
+  background #00d

@@ -5,5 +5,10 @@
   ],
   "description": "",
   "license": "MIT",
-  "dependencies": {}
+  "dependencies": {
+    "handlebars": "~4.0.5"
+  },
+  "devDependencies": {
+    "bemto": "~1.0.0"
+  }
 }

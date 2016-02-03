@@ -3,4 +3,26 @@ block head
   title index
 
 block body
-  img(src="images/front-end.png")
+  
+  .cart
+  .container
+    h2 НАШЕ МЕНЮ
+    +b.row
+    +b.row#categories
+      script(id="category-template" type="text/x-handlebars-template")
+        |{{#each categories}}
+        div(data-id="{{id}}").category
+          .category__body
+            img(src="images/p.jpeg").category__image
+            .category__title {{title}}
+        |{{/each}}
+
+    +b.row#products
+      script(id="product-template" type="text/x-handlebars-template")
+        |{{#each products}}
+        +e(data-category-id="{{categoryID}}").col._a_12._b_6._c_4._d_4._e_3.product
+          .product__body
+            img(src="images/p.jpeg").product__image
+            .product__title {{title}}
+            .btn Добавить в корзину
+        |{{/each}}
