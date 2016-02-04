@@ -137,7 +137,6 @@ $ ->
   rander = (_id, _template, _data, _callback) ->
     template = Handlebars.compile $(_template).html()
     $(_id).html template(data)
-    console.log typeof _callback
     if _callback and typeof _callback == 'function'
       _callback()
     return
@@ -164,5 +163,81 @@ $ ->
         $items.addClass 'product_active'
 
 
- $cart = $ '.cart'
- 
+  $cart = $ '.cart'
+
+  getProductById = (_id) ->
+    id = (parseInt _id) || 0
+
+    product = {}
+
+    $.each data.products, ->
+      console.log this.id
+      if this.id is id
+        product = this
+        false
+
+    return product
+
+  console.log getProductById(1)
+
+  class Categories
+    items = {}
+    constructor : (_items) ->
+      if _items and typeof _items is 'object'
+        items = _items
+
+    getById: (_id) ->
+      id = (parseInt _id) || 0
+      item = undefined
+      $.each items, ->
+        if this.id is id
+          item = this
+          false
+      item
+
+    getAll: ->
+      items
+
+
+  class Products
+    items = {}
+    constructor : (_items) ->
+      if _items and typeof _items is 'object'
+        items = _items
+    getById: (_id) ->
+      id = (parseInt _id) || 0
+      item = undefined
+      $.each items, ->
+        if this.id is id
+          item = this
+          false
+      item
+
+    getAll: ->
+      items
+
+  class Cart
+    items = ''
+    sum = 0
+    constructor : () ->
+      _arr = localStorage.getItem('cart.items').split(';')
+      $.echo _arr, () ->
+        arr = this.split ':'
+
+    add: (_item) ->
+      items.push(_item)
+      this.update()
+
+    remove: (_id) ->
+      this.update()
+    update: () ->
+      localStorage.setItem 'cart.items', items 
+
+  class App
+    render: (_selector, _template, _data, _callback) ->
+      template = Handlebars.compile $(_template).html()
+      $(_selector).html template(data)
+
+      if _callback and typeof _callback is 'function'
+        _callback()
+      return
