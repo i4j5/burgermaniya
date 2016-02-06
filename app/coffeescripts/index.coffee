@@ -217,21 +217,34 @@ $ ->
       items
 
   class Cart
-    items = ''
+    items = {}
     sum = 0
     constructor : () ->
       _arr = localStorage.getItem('cart.items').split(';')
-      $.echo _arr, () ->
+      $.each _arr, () ->
         arr = this.split ':'
+        items[arr[0]] = arr[1] 
 
-    add: (_item) ->
-      items.push(_item)
+    add: (_id) ->
+    	if items[_id] != undefined
+      	items[_id] = items[_id]++
+      else 
+      	items[_id] = 1
       this.update()
 
     remove: (_id) ->
+      delete items[_id]
       this.update()
     update: () ->
-      localStorage.setItem 'cart.items', items 
+    	_str = undefined
+
+    	$.each items, (key, value) ->
+    		if _str == undefined
+    			_str = "#{key}:#{value}"
+    		else
+    			_str = "#{_str};#{key}:#{value}"
+
+      localStorage.setItem 'cart.items', _str 
 
   class App
     render: (_selector, _template, _data, _callback) ->
