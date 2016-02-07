@@ -4,7 +4,34 @@ block head
 
 block body
   
-  .cart
+  #cart
+
+  script(id="cart-template" type="text/x-handlebars-template")
+    +b.cart
+      +e.body
+        .row
+          .row__col.row__col_a_3
+            +e.title Наименование
+          .row__col.row__col_a_3
+            +e.quantity количество
+          .row__col.row__col_a_3
+            +e.price цена
+          .row__col.row__col_a_3
+            +e.clean 
+        hr
+        |{{#each items}}
+        .row
+          .row__col.row__col_a_3
+            +e.title {{title}}
+          .row__col.row__col_a_3
+            +e.quantity {{quantity}}
+          .row__col.row__col_a_3
+            +e.price {{price}} руб.
+          .row__col.row__col_a_3
+            +e(span)(data-id="{{id}}").clean X
+        hr
+        |{{/each}}
+        итого: {{sum}} руб.
   .container
     h2 НАШЕ МЕНЮ
     +b.row

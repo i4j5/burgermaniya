@@ -44,6 +44,13 @@ $ ->
         'img': ''
         'categoryID': 1
       }
+      {  
+        'id': 3
+        'title': 'Товар 3'
+        'price': 200
+        'img': ''
+        'categoryID': 2
+      }
     ]
 
   class Categories
@@ -59,7 +66,11 @@ $ ->
         if this.id is id
           item = this
           false
-      item
+      
+      obj = {}
+      for key of item
+        obj[key] = item[key]
+      obj
 
     getAll: ->
       items
@@ -77,7 +88,11 @@ $ ->
         if this.id is id
           item = this
           false
-      item
+
+      obj = {}
+      for key of item
+        obj[key] = item[key]
+      obj
 
     getAll: ->
       items
@@ -127,7 +142,7 @@ $ ->
 
         item = app.products.getById _key
 
-        sum = sum + ( (parseInt item.price) * (parseInt _value) )
+        sum = sum + parseInt item.price * parseInt _value
 
       localStorage.setItem 'cart.items', str 
 
@@ -142,7 +157,7 @@ $ ->
 
     render: (_selector, _template, _data, _callback) ->
       template = Handlebars.compile $(_template).html()
-      $(_selector).html template(data)
+      $(_selector).html template(_data)
 
       if _callback and typeof _callback is 'function'
         _callback()
@@ -161,18 +176,28 @@ $ ->
 
       app.сart.update ->
         if app.сart.getSum() == 0
-          $('.cart').text "Пусто"
+          $('.cart1').text "Пусто"
         else 
-          $('.cart').text "#{app.сart.getSum()} руб."
+          $('.cart1').text "#{app.сart.getSum()} руб."
 
       $('body').on 'click', '.cart__add', ->
         $this = $ this
         id = $this.data 'id'
         app.сart.add id, ->
           if app.сart.getSum() == 0
-            $('.cart').text "Пусто"
+            $('.cart1').text "Пусто"
           else 
-            $('.cart').text "#{app.сart.getSum()} руб."
+            $('.cart1').text "#{app.сart.getSum()} руб."
+
+          dataCart.items = []
+          dataCart.sum = app.сart.getSum()
+          $.each app.сart.getItems(), (_key, _value) ->
+            item = {}
+            item = app.products.getById _key
+            item.quantity = _value
+            item.price = parseInt item.price * parseInt _value
+            dataCart.items.push item
+          app.render '#cart', '#cart-template', dataCart, ->
 
       $('body').on 'click', '.category', ->
         $this = $ this
@@ -185,6 +210,29 @@ $ ->
         $items = $ "[data-category-id=#{categoryID}]"
         $items.addClass 'product_active'
 
-      $('body').on 'click', '.cart', ->
-        app.сart.clean ->
-          $('.cart').text "Пусто"
+      $('body').on 'click', '.cart__clean', ->
+        $this = $ this
+        id = $this.data('id')
+        app.сart.remove (parseInt id), ->
+          dataCart.items = []
+          $.each app.сart.getItems(), (_key, _value) ->
+            item = app.products.getById _key
+            item.quantity = _value
+            item.price = parseInt item.price * parseInt _value
+            dataCart.items.push item
+          dataCart.sum = app.сart.getSum()
+          app.render '#cart', '#cart-template', dataCart
+      
+      dataCart = {        
+        items: []
+        sum: app.сart.getSum()
+      }
+
+      $.each app.сart.getItems(), (_key, _value) ->
+        item = app.products.getById _key
+        item.quantity = _value
+        item.price = parseInt item.price * parseInt _value
+        dataCart.items.push item
+
+      app.render '#cart', '#cart-template', dataCart, ->
+        console.log 'карзина'
