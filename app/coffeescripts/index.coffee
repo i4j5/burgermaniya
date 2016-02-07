@@ -176,7 +176,7 @@ $ ->
     constructor : () ->
       _arr = localStorage.getItem('cart.items')
 
-      if _arr != ''
+      if _arr != '' and _arr != null
         $.each _arr.split(';'), () ->
           arr = this.split ':'
           items[arr[0]] = arr[1]
