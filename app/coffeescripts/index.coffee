@@ -33,104 +33,16 @@ $ ->
       { 
         'id': 1
         'title': 'Товар 1'
+        'price': 100
         'img': ''
         'categoryID': 1
       }
       {  
         'id': 2
         'title': 'Товар 2'
-        'img': ''
-        'categoryID': 2
-      }
-      { 
-        'id': 3
-        'title': 'Товар 1'
+        'price': 400
         'img': ''
         'categoryID': 1
-      }
-      {  
-        'id': 4
-        'title': 'Товар 2'
-        'img': ''
-        'categoryID': 2
-      }
-      { 
-        'id': 5
-        'title': 'Товар 1'
-        'img': ''
-        'categoryID': 1
-      }
-      {  
-        'id': 6
-        'title': 'Товар 2'
-        'img': ''
-        'categoryID': 2
-      }
-      { 
-        'id': 7
-        'title': 'Товар 1'
-        'img': ''
-        'categoryID': 5
-      }
-      {  
-        'id': 8
-        'title': 'Товар 2'
-        'img': ''
-        'categoryID': 2
-      }
-      {  
-        'id': 9
-        'title': 'Товар 2'
-        'img': ''
-        'categoryID': 4
-      }
-      { 
-        'id': 10
-        'title': 'Товар 1'
-        'img': ''
-        'categoryID': 1
-      }
-      {  
-        'id': 11
-        'title': 'Товар 2'
-        'img': ''
-        'categoryID': 4
-      }
-      {  
-        'id': 12
-        'title': 'Товар 2'
-        'img': ''
-        'categoryID': 4
-      }
-      { 
-        'id': 13
-        'title': 'Товар 1'
-        'img': ''
-        'categoryID': 4
-      }
-      {  
-        'id': 14
-        'title': 'Товар 2'
-        'img': ''
-        'categoryID': 4
-      }
-      {  
-        'id': 15
-        'title': 'Товар 2'
-        'img': ''
-        'categoryID': 3
-      }
-      { 
-        'id': 16
-        'title': 'Товар 1'
-        'img': ''
-        'categoryID': 3
-      }
-      {  
-        'id': 17
-        'title': 'Товар 2'
-        'img': ''
-        'categoryID': 3
       }
     ]
 
@@ -184,6 +96,9 @@ $ ->
     getItems: ->
       items
 
+    getSum: ->
+      sum
+
     add: (_id, _callback) ->
       if items[_id] != undefined
         items[_id] = (parseInt items[_id]) + 1
@@ -196,16 +111,25 @@ $ ->
       delete items[_id]
       this.update(_callback)
 
+    clean: (_callback) ->
+      items = {}
+      this.update(_callback)
+
     update: (_callback) ->
-      _str = ''
+      str = ''
+      sum = 0
 
-      $.each items, (key, value) ->
-        if _str == ''
-          _str = "#{key}:#{value}"
+      $.each items, (_key, _value) ->
+        if str == ''
+          str = "#{_key}:#{_value}"
         else
-          _str = "#{_str};#{key}:#{value}"
+          str = "#{str};#{_key}:#{_value}"
 
-      localStorage.setItem 'cart.items', _str 
+        item = app.products.getById _key
+
+        sum = sum + ( (parseInt item.price) * (parseInt _value) )
+
+      localStorage.setItem 'cart.items', str 
 
       if _callback and typeof _callback is 'function'
         _callback()
@@ -236,23 +160,19 @@ $ ->
       $items.addClass 'product_active'
 
       app.сart.update ->
-          items = app.сart.getItems()
-          i = 0
-          $.each items, (key, value) ->
-            i = (parseInt i) + 1
-
-          $('.cart').text "#{i} наименований товаров"
+        if app.сart.getSum() == 0
+          $('.cart').text "Пусто"
+        else 
+          $('.cart').text "#{app.сart.getSum()} руб."
 
       $('body').on 'click', '.cart__add', ->
         $this = $ this
         id = $this.data 'id'
         app.сart.add id, ->
-          items = app.сart.getItems()
-          i = 0
-          $.each items, (key, value) ->
-            i = (parseInt i) + 1
-
-          $('.cart').text "#{i} наименований товаров"
+          if app.сart.getSum() == 0
+            $('.cart').text "Пусто"
+          else 
+            $('.cart').text "#{app.сart.getSum()} руб."
 
       $('body').on 'click', '.category', ->
         $this = $ this
@@ -264,3 +184,7 @@ $ ->
         $('.product').removeClass 'product_active'
         $items = $ "[data-category-id=#{categoryID}]"
         $items.addClass 'product_active'
+
+      $('body').on 'click', '.cart', ->
+        app.сart.clean ->
+          $('.cart').text "Пусто"
