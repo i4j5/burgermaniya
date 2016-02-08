@@ -15,8 +15,17 @@ grid-gutter-width = 14px
   @media (min-width: 1200px)
     col('e')
 
+width-items = 230px 
 .container
-  max-width 900px
   margin 0 auto
-  padding-left (grid-gutter-width / 2)
-  padding-right (grid-gutter-width / 2)
+  
+  width width-items 
+  
+  @media (min-width:  460px)
+    width width-items * 2
+    
+  @media (min-width: 690px)
+    width width-items * 3
+  
+  @media (min-width: 920px)
+    width width-items * 4

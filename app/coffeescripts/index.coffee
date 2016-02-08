@@ -49,7 +49,21 @@ $ ->
         'title': 'Товар 3'
         'price': 200
         'img': ''
-        'categoryID': 2
+        'categoryID': 1
+      }
+      {  
+        'id': 4
+        'title': 'Товар 3'
+        'price': 200
+        'img': ''
+        'categoryID': 1
+      }
+      {  
+        'id': 5
+        'title': 'Товар 3'
+        'price': 200
+        'img': ''
+        'categoryID': 1
       }
     ]
 
@@ -116,18 +130,26 @@ $ ->
 
     add: (_id, _callback) ->
       if items[_id] != undefined
-        items[_id] = (parseInt items[_id]) + 1
+        items[_id] = parseInt items[_id] + 1
       else 
         items[_id] = 1
 
       this.update(_callback)
 
     remove: (_id, _callback) ->
-      delete items[_id]
+      console.log parseInt items[_id]
+      if (parseInt items[_id]) != 1
+        items[_id] = parseInt items[_id] - 1
+      else 
+        delete items[_id]
+
       this.update(_callback)
 
-    clean: (_callback) ->
-      items = {}
+    clean: (_id, _callback) ->
+      if _id != ''
+        delete items[_id]
+      else 
+        items = {}
       this.update(_callback)
 
     update: (_callback) ->
@@ -213,7 +235,7 @@ $ ->
       $('body').on 'click', '.cart__clean', ->
         $this = $ this
         id = $this.data('id')
-        app.сart.remove (parseInt id), ->
+        app.сart.clean (parseInt id), ->
           dataCart.items = []
           $.each app.сart.getItems(), (_key, _value) ->
             item = app.products.getById _key
@@ -234,5 +256,32 @@ $ ->
         item.price = parseInt item.price * parseInt _value
         dataCart.items.push item
 
-      app.render '#cart', '#cart-template', dataCart, ->
-        console.log 'карзина'
+      app.render '#cart', '#cart-template', dataCart
+
+      $('body').on 'click', '.p', ->
+        $this = $ this
+        id = $this.parent().data('id')
+        app.сart.add parseInt id
+        dataCart.items = []
+        dataCart.sum = app.сart.getSum()
+        $.each app.сart.getItems(), (_key, _value) ->
+          item = {}
+          item = app.products.getById _key
+          item.quantity = _value
+          item.price = parseInt item.price * parseInt _value
+          dataCart.items.push item
+        app.render '#cart', '#cart-template', dataCart, ->
+
+      $('body').on 'click', '.m', ->
+        $this = $ this
+        id = $this.parent().data('id')
+        app.сart.remove parseInt id
+        dataCart.items = []
+        dataCart.sum = app.сart.getSum()
+        $.each app.сart.getItems(), (_key, _value) ->
+          item = {}
+          item = app.products.getById _key
+          item.quantity = _value
+          item.price = parseInt item.price * parseInt _value
+          dataCart.items.push item
+        app.render '#cart', '#cart-template', dataCart, ->

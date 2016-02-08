@@ -4,7 +4,7 @@ block head
 
 block body
   
-  #cart
+  //- #cart
 
   script(id="cart-template" type="text/x-handlebars-template")
     +b.cart
@@ -24,14 +24,17 @@ block body
           .row__col.row__col_a_3
             +e.title {{title}}
           .row__col.row__col_a_3
-            +e.quantity {{quantity}}
+            +e(div)(data-id="{{id}}").quantity
+              span.m (-) 
+              {{quantity}} 
+              span.p (+)
           .row__col.row__col_a_3
             +e.price {{price}} руб.
           .row__col.row__col_a_3
             +e(span)(data-id="{{id}}").clean X
         hr
         |{{/each}}
-        итого: {{sum}} руб.
+        |итого: {{sum}} руб.
   .container
     h2 НАШЕ МЕНЮ
     +b.row
@@ -44,10 +47,10 @@ block body
             .category__title {{title}}
         |{{/each}}
 
-    +b.row#products
+    #products
       script(id="product-template" type="text/x-handlebars-template")
         |{{#each products}}
-        +e(data-category-id="{{categoryID}}").col._a_12._b_6._c_4._d_4._e_3.product
+        div(data-category-id="{{categoryID}}").product
           .product__body
             img(src="images/p.jpeg").product__image
             .product__title {{title}}

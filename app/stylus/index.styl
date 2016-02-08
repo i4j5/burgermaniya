@@ -10,25 +10,32 @@ body
   padding .8em 1em
   background #ddd
   
+#product
+  text-align center
 .product
   display none
   transition all .1s linear
+  margin 5px 
+  margin-bottom 6px
+  float left
   &_active
-    display block
+    display inline-block
   &__body
-    margin-bottom 14px
+    width 220px
+    height 350px
     background #fff
     padding 10px
     box-shadow 0px 1px 5px 1px #ddd
   &__title
+    height 20px
     text-align left 
     font-size 16px
     line-height 1.2em
     margin-bottom 20px
   
   &__image
-    margin: 5px auto
-    max-width 100%
+    margin: 0 auto
+    width 190px
 
 #categories
   margin-bottom 20px      
