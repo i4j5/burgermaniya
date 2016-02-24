@@ -1,39 +1,58 @@
 @import url(https://fonts.googleapis.com/css?family=Philosopher:400,700,400italic,700italic&subset=latin,cyrillic)
 body 
   background #fff
-  text-align center
-  padding-top 50px
   font-family 'Philosopher', sans-serif
   
 .header
+  height 500px
+  width 100%
+  background-color #fff
+  background-image url(../images/bg.jpg)
+  background-repeat no-repeat
+  background-position bottom center
   margin-bottom 50px
+
+.title
+  text-align center
+  font-size 35px 
+  color #000
+  line-height 1.2em
+  margin-bottom 10px
   
 .logo
+  margin-top 5px
   font-size 30px
   text-align center
   span
     color #D64D4D
   img
-    width 100px
-    
+    width 90px
+  &__description
+    font-size 12px
+    line-height 1.2em
+    margin-top 5px
+    color #808080
+ 
+ .phone
+   text-align center
+   margin-top 5px
+   color #000
+   font-size 18px
+   line-height 1em
+   font-weight 900
+
 .cart
-  // float right
-  text-align left
-  height 32px
-  font-size 14px
-  line-height 15px
-  color #808080
-  font-weight 300
-  padding-left 35px
+  width 50px
+  height 50px
+  position fixed
+  top 50%
+  margin-top -25px
+  right 0
+  background-color #000
   background-image url(../images/cart.png)
   background-repeat no-repeat
-  background-position left center
+  background-position center
   display inline-block
-  span 
-    color #000
-    line-height 22px
-    text-align center
-    font-weight 900
 
 .btn
   display inline-block
@@ -43,6 +62,10 @@ body
   background #D64D4D
   color #fff
   
+
+ .catalog
+   text-align center 
+
 .product
   // display none
   display inline-block
