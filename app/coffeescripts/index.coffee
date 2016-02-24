@@ -187,101 +187,101 @@ $ ->
 
   app = new App
 
-  app.render '#categories', '#category-template', data, ->
-    app.render '#products', '#product-template', data, ->
-      $first = $ '.category:first'
-      categoryID = $first.data 'id'
-      $first.addClass 'category_active'
-      $('.product').removeClass 'product_active'
-      $items = $ "[data-category-id=#{categoryID}]"
-      $items.addClass 'product_active'
+  # app.render '#categories', '#category-template', data, ->
+  #   app.render '#products', '#product-template', data, ->
+  #     $first = $ '.category:first'
+  #     categoryID = $first.data 'id'
+  #     $first.addClass 'category_active'
+  #     $('.product').removeClass 'product_active'
+  #     $items = $ "[data-category-id=#{categoryID}]"
+  #     $items.addClass 'product_active'
 
-      app.сart.update ->
-        if app.сart.getSum() == 0
-          $('.cart1').text "Пусто"
-        else 
-          $('.cart1').text "#{app.сart.getSum()} руб."
+  #     app.сart.update ->
+  #       if app.сart.getSum() == 0
+  #         $('.cart1').text "Пусто"
+  #       else 
+  #         $('.cart1').text "#{app.сart.getSum()} руб."
 
-      $('body').on 'click', '.cart__add', ->
-        $this = $ this
-        id = $this.data 'id'
-        app.сart.add id, ->
-          if app.сart.getSum() == 0
-            $('.cart1').text "Пусто"
-          else 
-            $('.cart1').text "#{app.сart.getSum()} руб."
+  #     $('body').on 'click', '.cart__add', ->
+  #       $this = $ this
+  #       id = $this.data 'id'
+  #       app.сart.add id, ->
+  #         if app.сart.getSum() == 0
+  #           $('.cart1').text "Пусто"
+  #         else 
+  #           $('.cart1').text "#{app.сart.getSum()} руб."
 
-          dataCart.items = []
-          dataCart.sum = app.сart.getSum()
-          $.each app.сart.getItems(), (_key, _value) ->
-            item = {}
-            item = app.products.getById _key
-            item.quantity = _value
-            item.price = parseInt item.price * parseInt _value
-            dataCart.items.push item
-          app.render '#cart', '#cart-template', dataCart, ->
+  #         dataCart.items = []
+  #         dataCart.sum = app.сart.getSum()
+  #         $.each app.сart.getItems(), (_key, _value) ->
+  #           item = {}
+  #           item = app.products.getById _key
+  #           item.quantity = _value
+  #           item.price = parseInt item.price * parseInt _value
+  #           dataCart.items.push item
+  #         app.render '#cart', '#cart-template', dataCart, ->
 
-      $('body').on 'click', '.category', ->
-        $this = $ this
-        categoryID = $this.data 'id'
+  #     $('body').on 'click', '.category', ->
+  #       $this = $ this
+  #       categoryID = $this.data 'id'
 
-        $('.category').removeClass 'category_active'
-        $this.addClass 'category_active'
+  #       $('.category').removeClass 'category_active'
+  #       $this.addClass 'category_active'
 
-        $('.product').removeClass 'product_active'
-        $items = $ "[data-category-id=#{categoryID}]"
-        $items.addClass 'product_active'
+  #       $('.product').removeClass 'product_active'
+  #       $items = $ "[data-category-id=#{categoryID}]"
+  #       $items.addClass 'product_active'
 
-      $('body').on 'click', '.cart__clean', ->
-        $this = $ this
-        id = $this.data('id')
-        app.сart.clean (parseInt id), ->
-          dataCart.items = []
-          $.each app.сart.getItems(), (_key, _value) ->
-            item = app.products.getById _key
-            item.quantity = _value
-            item.price = parseInt item.price * parseInt _value
-            dataCart.items.push item
-          dataCart.sum = app.сart.getSum()
-          app.render '#cart', '#cart-template', dataCart
+  #     $('body').on 'click', '.cart__clean', ->
+  #       $this = $ this
+  #       id = $this.data('id')
+  #       app.сart.clean (parseInt id), ->
+  #         dataCart.items = []
+  #         $.each app.сart.getItems(), (_key, _value) ->
+  #           item = app.products.getById _key
+  #           item.quantity = _value
+  #           item.price = parseInt item.price * parseInt _value
+  #           dataCart.items.push item
+  #         dataCart.sum = app.сart.getSum()
+  #         app.render '#cart', '#cart-template', dataCart
       
-      dataCart = {        
-        items: []
-        sum: app.сart.getSum()
-      }
+  #     dataCart = {        
+  #       items: []
+  #       sum: app.сart.getSum()
+  #     }
 
-      $.each app.сart.getItems(), (_key, _value) ->
-        item = app.products.getById _key
-        item.quantity = _value
-        item.price = parseInt item.price * parseInt _value
-        dataCart.items.push item
+  #     $.each app.сart.getItems(), (_key, _value) ->
+  #       item = app.products.getById _key
+  #       item.quantity = _value
+  #       item.price = parseInt item.price * parseInt _value
+  #       dataCart.items.push item
 
-      app.render '#cart', '#cart-template', dataCart
+  #     app.render '#cart', '#cart-template', dataCart
 
-      $('body').on 'click', '.p', ->
-        $this = $ this
-        id = $this.parent().data('id')
-        app.сart.add parseInt id
-        dataCart.items = []
-        dataCart.sum = app.сart.getSum()
-        $.each app.сart.getItems(), (_key, _value) ->
-          item = {}
-          item = app.products.getById _key
-          item.quantity = _value
-          item.price = parseInt item.price * parseInt _value
-          dataCart.items.push item
-        app.render '#cart', '#cart-template', dataCart, ->
+  #     $('body').on 'click', '.p', ->
+  #       $this = $ this
+  #       id = $this.parent().data('id')
+  #       app.сart.add parseInt id
+  #       dataCart.items = []
+  #       dataCart.sum = app.сart.getSum()
+  #       $.each app.сart.getItems(), (_key, _value) ->
+  #         item = {}
+  #         item = app.products.getById _key
+  #         item.quantity = _value
+  #         item.price = parseInt item.price * parseInt _value
+  #         dataCart.items.push item
+  #       app.render '#cart', '#cart-template', dataCart, ->
 
-      $('body').on 'click', '.m', ->
-        $this = $ this
-        id = $this.parent().data('id')
-        app.сart.remove parseInt id
-        dataCart.items = []
-        dataCart.sum = app.сart.getSum()
-        $.each app.сart.getItems(), (_key, _value) ->
-          item = {}
-          item = app.products.getById _key
-          item.quantity = _value
-          item.price = parseInt item.price * parseInt _value
-          dataCart.items.push item
-        app.render '#cart', '#cart-template', dataCart, ->
+  #     $('body').on 'click', '.m', ->
+  #       $this = $ this
+  #       id = $this.parent().data('id')
+  #       app.сart.remove parseInt id
+  #       dataCart.items = []
+  #       dataCart.sum = app.сart.getSum()
+  #       $.each app.сart.getItems(), (_key, _value) ->
+  #         item = {}
+  #         item = app.products.getById _key
+  #         item.quantity = _value
+  #         item.price = parseInt item.price * parseInt _value
+  #         dataCart.items.push item
+  #       app.render '#cart', '#cart-template', dataCart, ->

@@ -3,57 +3,115 @@ block head
   title index
 
 block body
-  
-  //- #cart
+  .header
+    .container
+      +b.row
+        +e.col._a_5
+          .phone 890144321818
+        +e.col._a_2
+          .logo
+            img(src="images/logo.jpg")
+            br
+            |Дом 
+            span Суши
+        +e.col._a_5
+          .cart
+            |Ваша карзина
+            br
+            span 390 руб.
+  .catalog
+    .container
+      +b.row
+        +e.col._a_12
+          .category.category_active
+            .category__body
+              img(src="images/p1.png").category__image
+              .category__title Суши
+          .category
+            .category__body
+              img(src="images/p2.png").category__image
+              .category__title Ролы
+          .category
+            .category__body
+              img(src="images/p3.png").category__image
+              .category__title Сашими
+          .category
+            .category__body
+              img(src="images/p4.png").category__image
+              .category__title Соусы
 
-  script(id="cart-template" type="text/x-handlebars-template")
-    +b.cart
-      +e.body
-        .row
-          .row__col.row__col_a_3
-            +e.title Наименование
-          .row__col.row__col_a_3
-            +e.quantity количество
-          .row__col.row__col_a_3
-            +e.price цена
-          .row__col.row__col_a_3
-            +e.clean 
-        hr
-        |{{#each items}}
-        .row
-          .row__col.row__col_a_3
-            +e.title {{title}}
-          .row__col.row__col_a_3
-            +e(div)(data-id="{{id}}").quantity
-              span.m (-) 
-              {{quantity}} 
-              span.p (+)
-          .row__col.row__col_a_3
-            +e.price {{price}} руб.
-          .row__col.row__col_a_3
-            +e(span)(data-id="{{id}}").clean X
-        hr
-        |{{/each}}
-        |итого: {{sum}} руб.
-  .container
-    h2 НАШЕ МЕНЮ
-    +b.row
-    +b.row#categories
-      script(id="category-template" type="text/x-handlebars-template")
-        |{{#each categories}}
-        div(data-id="{{id}}").category
-          .category__body
-            img(src="images/p.jpeg").category__image
-            .category__title {{title}}
-        |{{/each}}
+    .container
+       +b.row
+        +e.col._a_12
+          +b.product
+            +e.body
+              +e.image
+                img(src="images/p1.png")
+              +e.title Товар
+              +e.description 
+                Текст этот, несмотря на название, не имеет никакого отношения к обитателям водоемов. Используется он веб-дизайнерами для вставки
+              +e.price 300 руб.
+              .btn В корзину
+          +b.product
+            +e.body
+              +e.image
+                img(src="images/p2.png")
+              +e.title Товар
+              +e.description
+                Текст этот, несмотря на название, не имеет никакого отношения к обитателям водоемов. Используется он веб-дизайнерами для вставки
+              +e.price 300 руб.
+              .btn В корзину
+          +b.product
+            +e.body
+              +e.image
+                img(src="images/p3.png")
+              +e.title Товар
+              +e.description
+                Текст этот, несмотря на название, не имеет никакого отношения к обитателям водоемов
+              +e.price 300 руб.
+              .btn В корзину
+          +b.product
+            +e.body
+              +e.image
+                img(src="images/p4.png")
+              +e.title Товар
+              +e.description
+                Текст этот, несмотря на название, не имеет никакого отношения к обитателям водоемов. Используется он веб-дизайнерами для вставки
+              +e.price 300 руб.
+              .btn В корзину
 
-    #products
-      script(id="product-template" type="text/x-handlebars-template")
-        |{{#each products}}
-        div(data-category-id="{{categoryID}}").product
-          .product__body
-            img(src="images/p.jpeg").product__image
-            .product__title {{title}}
-            p {{price}}
-            .btn(data-id="{{id}}").cart__add Добавить в корзину
-        |{{/each}}
+          +b.product
+            +e.body
+              +e.image
+                img(src="images/p1.png")
+              +e.title Товар
+              +e.description
+                Текст этот, несмотря на название, не имеет
+              +e.price 300 руб.
+              .btn В корзину
+          +b.product
+            +e.body
+              +e.image
+                img(src="images/p2.png")
+              +e.title Товар
+              +e.description
+              +e.price 300 руб.
+              .btn В корзину
+          +b.product
+            +e.body
+              +e.image
+                img(src="images/p3.png")
+              +e.title Товар
+              +e.description
+                Текст этот, несмотря на название, не имеет никакого отношения к обитателям водоемов. Используется он веб-дизайнерами для вставки
+              +e.price 300 руб.
+              .btn В корзину
+          +b.product
+            +e.body
+              +e.image
+                img(src="images/p4.png")
+              +e.title Товар
+              +e.description
+                Текст этот, несмотря на название, не имеет никакого отношения к обитателям водоемов. Используется он веб-дизайнерами для вставки
+              +e.price 300 руб.
+              .btn В корзину

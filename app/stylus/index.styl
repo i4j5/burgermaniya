@@ -1,91 +1,119 @@
+@import url(https://fonts.googleapis.com/css?family=Philosopher:400,700,400italic,700italic&subset=latin,cyrillic)
 body 
-  background #fbfbfb
+  background #fff
   text-align center
   padding-top 50px
+  font-family 'Philosopher', sans-serif
   
+.header
+  margin-bottom 50px
+  
+.logo
+  font-size 30px
+  text-align center
+  span
+    color #D64D4D
+  img
+    width 100px
+    
+.cart
+  // float right
+  text-align left
+  height 32px
+  font-size 14px
+  line-height 15px
+  color #808080
+  font-weight 300
+  padding-left 35px
+  background-image url(../images/cart.png)
+  background-repeat no-repeat
+  background-position left center
+  display inline-block
+  span 
+    color #000
+    line-height 22px
+    text-align center
+    font-weight 900
+
 .btn
   display inline-block
-  font-size 12px
+  font-size 14px
   line-height 1em
-  padding .8em 1em
-  background #ddd
+  padding .8em 2em
+  background #D64D4D
+  color #fff
   
-#product
-  text-align center
 .product
-  display none
+  // display none
+  display inline-block
   transition all .1s linear
-  margin 5px 
-  margin-bottom 6px
+  margin 10px 
+  margin-bottom 11px
   float left
   &_active
     display inline-block
   &__body
     width 220px
-    height 350px
+    height 400px
     background #fff
-    padding 10px
-    box-shadow 0px 1px 5px 1px #ddd
+    padding 10px 15px
+    box-shadow 0px 1px 5px 1px rgba(236, 236, 236, .6)
+    border 1px solid #eee
+    transition all .2s linear
+    &:hover
+      border 1px solid #ddd
+      box-shadow 0px 1px 10px 4px #ececec
   &__title
     height 20px
+    text-align center 
+    font-size 20px
+    font-weight 900
+    line-height 1em
+    margin-bottom 10px
+  &__description
+    margin-bottom 10px
     text-align left 
-    font-size 16px
+    font-size 13px
+    font-weight 400
     line-height 1.2em
-    margin-bottom 20px
-  
+    color #565656
+    height 90px
   &__image
-    margin: 0 auto
-    width 190px
+    display block
+    margin 10px auto
+    height 150px
+    img
+      max-width 100%
+      height 150px
+  &__price
+    height 20px
+    font-size 16px
+    line-height 20px
+    font-weight 900
+    margin-bottom 10px
+    color #000
 
-#categories
-  margin-bottom 20px      
 .category  
   cursor pointer
   display inline-block
-  margin-right 25px
-  margin-bottom 15px
-  //float left
-
+  margin 0 15px 10px 15px
   &__body
     position relative
-    //background #f6f6f6
     padding 10px 0px
   &__title
     text-align center 
-    margin-left 50px
     font-size 16px
+    font-weight 900
     line-height 20px
     display inline-block
-  
   &__image
-    position absolute
-    //top -10px
-    //float left
-    //margin: 0 10px
-    top 0
-    left 0
+    display block
     width 40px
     height 40px
-    border-radius 50px
-    border 2px solid #ddd
-  
+    margin auto
+    margin-bottom 2px
   &_active
-    .category__image
-      border 2px solid #d00
-
-.cart
-
-  &__body
-    max-width 800px
-    margin 10px auto
-    text-align center
-  &__tiile
-    float left
-  &__quantity
-    float left
-  &__price
-    float left
-  &__clean
-    float left
+    .category__title
+      color #D64D4D
   
       
