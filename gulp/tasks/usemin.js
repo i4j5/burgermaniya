@@ -22,9 +22,9 @@ gulp.task('usemin', function(){
       ],
 
       html: [
-        minifyHtml({
-          empty: true
-        })
+        function () {
+          return minifyHtml({ empty: true });
+        }
       ],
 
       js: [uglify()]

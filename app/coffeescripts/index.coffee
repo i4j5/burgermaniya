@@ -151,17 +151,21 @@ $ ->
     $('body').on 'click', '.btn', ->
       $this = $ this
       id = $this.data 'id'
+      if !app.cart.sum
+        $('.cart').addClass 'cart_active'
       app.cart.add parseInt id
       app.cart.update()
-      setTimeout (->
-        $('.cart__icon').animate {
-          left: "-40px"
-        }, 200
-      ), 100
 
-      $('.cart__icon').animate {
-        left: "-50px"
-      }, 100, ->
+
+      # setTimeout (->
+      #   $('.cart__icon').animate {
+      #     left: "-40px"
+      #   }, 200
+      # ), 100
+
+      # $('.cart__icon').animate {
+      #   left: "-50px"
+      # }, 100, ->
 
     $('body').on 'click', '.cart__plus', ->
       $this = $ this

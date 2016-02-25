@@ -1,13 +1,3 @@
-@import url(https://fonts.googleapis.com/css?family=Philosopher:400,700,400italic,700italic&subset=latin,cyrillic)
-body 
-  background #fff
-  font-family 'Philosopher', sans-serif
-
-html
-body
-  position relative
-  min-height 100%
-  
 .header
   height 500px
   width 100%
@@ -148,6 +138,7 @@ body
     position absolute
     top 3px
     right 3px
+    z-index 300
   &__total
     text-align center
     font-weight 15px
@@ -172,7 +163,7 @@ body
     right 0
     .cart__bg
       visibility visible
-      opacity .5
+      opacity .6
   &__icon
     width 60px
     height 50px
@@ -191,7 +182,7 @@ body
     z-index 50
   &__body
     z-index 100
-    padding 0px 8px
+    padding 0px 10px
     position relative
     width 100%
     height 100%
@@ -237,6 +228,7 @@ body
     opacity 1
     display inline-block
   &__body
+    border-radius 2px
     width 220px
     height 400px
     background #fff
@@ -300,4 +292,53 @@ body
     .category__title
       color #D64D4D
   
+
+@require "mixins/placeholder.styl"
+.form
+  margin-top 15px
+  background-color #fff
+  padding 10px 15px
+  border-radius 2px
+  &__title
+    margin 5px 0 15px 0
+    text-align center
+    line-height 1.1em
+    font-size 18px
+    font-weight 900
+  &__input
+  &__textarea
+  &__btn
+    appearance none
+    box-sizing border-box
+    line-height 1.1em
+    zoom 1
+    outline none
+    padding 10px
+    width 100%
+    font-weight 300
+    color #000
+    border 1px solid #eee
+    background-color #f8f8f8
+    border-radius 2px
+    margin-bottom 5px
+    font-size 14px
+    +placeholder()
+      color #252525
+    &:focus
+      outline none     
+  // &__input
+  //   // height 30px
+  // &__textarea
+  //   // height 50px
+  &__btn
+    // margin-top -2px
+    font-size 15px
+
+    border 0
+    background #D64D4D
+    color #fff
+    transition all .2s linear
+    cursor pointer
+    &:hover
+      background #CA2020
       

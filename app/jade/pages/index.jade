@@ -27,30 +27,36 @@ block body
           #cart
           script(id="cart-template" type="text/x-handlebars-template")
             |{{#each items}}
-            +b.row.cart__item
-              .cart__clean(data-id="{{id}}")
-              +e.col._a_6
-                img(src="{{img}}").cart__image
-                .cart__title
-                  |{{title}}
-              +e.col._a_6
-                .cart__quantity
-                  .row
-                    .cart__minus(data-id="{{id}}")
-                    .cart__quantity-val
-                      |{{quantity}} 
-                      span шт.
-                    .cart__plus(data-id="{{id}}")
-                  .cart__price
-                    |{{price}} 
-                    span руб.
-              +e.col._a_3
+            .cart__item
+              +b.row
+                .cart__clean(data-id="{{id}}")
+                +e.col._a_6
+                  img(src="{{img}}").cart__image
+                  .cart__title
+                    |{{title}}
+                +e.col._a_6
+                  .cart__quantity
+                    .row
+                      .cart__minus(data-id="{{id}}")
+                      .cart__quantity-val
+                        |{{quantity}} 
+                        span шт.
+                      .cart__plus(data-id="{{id}}")
+                    .cart__price
+                      |{{price}} 
+                      span руб.
+                +e.col._a_3
             |{{/each}}
-            {{#if sum}}
-            +b.row.cart__total
-              +e.col._a_12
-                |итого: {{sum}} руб.
-            {{/if}}
+            |{{#if sum}}
+            .cart__total
+              |итого: {{sum}} руб.
+            +b.form
+              +e.title Оформить заказ
+              +e('input').input(type="text" name="phone" placeholder="Телефон")
+              +e('input').input(type="text" name="" placeholder="Количество персон")
+              +e('textarea').textarea(rows="2" name="adress" placeholder="Адрес")
+              +e.btn(type="submit") Заказать
+            |{{/if}}
 
   .title Наше меню
   .catalog

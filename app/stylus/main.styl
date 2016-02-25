@@ -1,3 +1,13 @@
+@import url(https://fonts.googleapis.com/css?family=Philosopher:400,700,400italic,700italic&subset=latin,cyrillic)
+body 
+  background #fff
+  font-family 'Philosopher', sans-serif
+
+html
+body
+  position relative
+  min-height 100%
+
 @require "mixins/grid.styl"
 
 grid-columns = 12
@@ -15,21 +25,9 @@ grid-gutter-width = 14px
   @media (min-width: 1200px)
     col('e')
 
-width-items = 240px 
 .container
   margin 0 auto
-  padding-left 7px
-  padding-right 7px
+  padding-left grid-gutter-width / 2
+  padding-right grid-gutter-width / 2
   width 100%
   max-width 1200px
-  
-  // width width-items 
-  
-  // @media (min-width:  460px)
-  //   width width-items * 2
-    
-  // @media (min-width: 690px)
-  //   width width-items * 3
-  
-  // @media (min-width: 920px)
-  //   width width-items * 4
