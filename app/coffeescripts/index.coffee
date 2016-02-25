@@ -187,6 +187,12 @@ $ ->
 
   app = new App
 
+  $('.cart__icon').click ->
+    $('.cart').toggleClass 'cart_active'
+
+  $('.cart__bg').click ->
+    $('.cart').removeClass 'cart_active'
+
   # app.render '#categories', '#category-template', data, ->
   #   app.render '#products', '#product-template', data, ->
   #     $first = $ '.category:first'
