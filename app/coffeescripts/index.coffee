@@ -153,19 +153,22 @@ $ ->
       id = $this.data 'id'
       if !app.cart.sum
         $('.cart').addClass 'cart_active'
+        $('body').addClass 'cart-open'
+      # else
+      #   setTimeout (->
+      #     $('.cart__icon').animate {
+      #       left: "-40px"
+      #     }, 200
+      #   ), 100
+
+      #   $('.cart__icon').animate {
+      #     left: "-50px"
+      #   }, 100, ->
+        
       app.cart.add parseInt id
       app.cart.update()
 
 
-      # setTimeout (->
-      #   $('.cart__icon').animate {
-      #     left: "-40px"
-      #   }, 200
-      # ), 100
-
-      # $('.cart__icon').animate {
-      #   left: "-50px"
-      # }, 100, ->
 
     $('body').on 'click', '.cart__plus', ->
       $this = $ this
@@ -187,10 +190,15 @@ $ ->
 
 
   $('.cart__icon').click ->
-    $('.cart').toggleClass 'cart_active'
+    $('.cart').removeClass 'cart_active'
+    $('.cart').addClass 'cart_active'
+    # $('.cart').toggleClass 'cart_active'
+    $('body').addClass 'cart-open'
 
   $('.cart__bg').click ->
     $('.cart').removeClass 'cart_active'
+    $('body').removeClass 'cart-open'
+    
 
   # app.render '#categories', '#category-template', data, ->
   #   app.render '#products', '#product-template', data, ->
