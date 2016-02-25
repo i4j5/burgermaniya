@@ -72,11 +72,92 @@ body
   position fixed
   top 0
   bottom 0
-  right -300px
-  width 300px
+  right -280px
+  width 280px
   height 100%
-  min-height 300px
+  // min-height 300px
   transition all .2s linear
+  &__image
+    width 40px
+    margin-right 8px
+    display table
+    margin auto
+  &__title
+    margin-top 5px
+    font-size 14px
+    line-height 1.1em
+    font-weight 300
+    text-align center
+  &__quantity
+    display table
+    // margin auto
+    margin-top 8px
+  &__quantity-val
+    float left
+    text-align center
+    display inline-block
+    width 45px
+    height 20px
+    font-size 14px
+    font-weight 300
+    line-height 20px
+    span
+      font-size 10px
+  &__plus
+    opacity 0.5
+    cursor pointer
+    background-image url(../images/plus.png)
+    background-repeat no-repeat
+    background-position center
+    float left
+    display inline-block
+    width 20px
+    height 20px
+  &__minus
+    opacity 0.5
+    cursor pointer
+    background-image url(../images/minus.png)
+    background-repeat no-repeat
+    background-position center
+    float left
+    display inline-block
+    width 20px
+    height 20px
+  &__price
+    text-align center
+    font-size 14px
+    line-height 1.05em
+    margin-top 10px
+    span
+      font-size 10px
+  &__item
+    padding 10px
+    margin 5px 0
+    position relative
+    background #fff
+    border-radius 2px
+  &__clean
+    opacity 0.5
+    cursor pointer
+    background-image url(../images/clean.png)
+    background-repeat no-repeat
+    background-position center
+    display inline-block
+    width 20px
+    height 20px
+    position absolute
+    top 3px
+    right 3px
+  &__total
+    text-align center
+    font-weight 15px
+    line-height 1em
+    font-weight 900
+    padding 10px
+    margin 5px 0
+    position relative
+    background #fff
+    border-radius 2px
   &__bg
     position fixed
     top 0
@@ -92,10 +173,9 @@ body
     .cart__bg
       visibility visible
       opacity .5
-
   &__icon
     width 60px
-    height 40px
+    height 50px
     position absolute
     top 50%
     margin-top -20px
@@ -109,10 +189,9 @@ body
     border-top-left-radius 2px
     border-bottom-left-radius 2px
     z-index 50
-  
   &__body
     z-index 100
-    padding 10px
+    padding 0px 8px
     position relative
     width 100%
     height 100%
@@ -136,14 +215,26 @@ body
    text-align center 
    margin-bottom 50px
 
+
+@keyframes product_active
+  0%
+    opacity 0
+    display none
+  100%
+    opacity 1
+    display inline-block
+
 .product
-  // display none
-  display inline-block
-  transition all .1s linear
+  transition all .2s linear
   margin 10px 
   margin-bottom 11px
   // float left
+  opacity 1
+  display none
   &_active
+    animation-name product_active
+    animation-duration 2s
+    opacity 1
     display inline-block
   &__body
     width 220px

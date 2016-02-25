@@ -21,116 +21,62 @@ block body
   +b.cart
     +e.bg
     +e.icon 
-    +e.body 
-      |fhdfhjdhj <br><br> hfjhdjfhdj
-      |fhdfhjdhj <br><br> hfjhdjfhdj
-      |fhdfhjdhj <br><br> hfjhdjfhdj
-      |fhdfhjdhj <br><br> hfjhdjfhdj
-      |fhdfhjdhj <br><br> hfjhdjfhdj
-      |fhdfhjdhj <br><br> hfjhdjfhdj
-      |fhdfhjdhj <br><br> hfjhdjfhdj
-      |fhdfhjdhj <br><br> hfjhdjfhdj
-      |fhdfhjdhj <br><br> hfjhdjfhdj
-      |fhdfhjdhj <br><br> hfjhdjfhdj
-      |fhdfhjdhj <br><br> hfjhdjfhdj
+    +e.body
+      +b.row
+        +e.col._a_12
+          #cart
+          script(id="cart-template" type="text/x-handlebars-template")
+            |{{#each items}}
+            +b.row.cart__item
+              .cart__clean(data-id="{{id}}")
+              +e.col._a_6
+                img(src="{{img}}").cart__image
+                .cart__title
+                  |{{title}}
+              +e.col._a_6
+                .cart__quantity
+                  .row
+                    .cart__minus(data-id="{{id}}")
+                    .cart__quantity-val
+                      |{{quantity}} 
+                      span шт.
+                    .cart__plus(data-id="{{id}}")
+                  .cart__price
+                    |{{price}} 
+                    span руб.
+              +e.col._a_3
+            |{{/each}}
+            {{#if sum}}
+            +b.row.cart__total
+              +e.col._a_12
+                |итого: {{sum}} руб.
+            {{/if}}
 
   .title Наше меню
   .catalog
     .container
       +b.row
         +e.col._a_12
-          .category.category_active
-            .category__body
-              img(src="images/p1.png").category__image
-              .category__title Суши
-          .category
-            .category__body
-              img(src="images/p2.png").category__image
-              .category__title Ролы
-          .category
-            .category__body
-              img(src="images/p3.png").category__image
-              .category__title Сашими
-          .category
-            .category__body
-              img(src="images/p4.png").category__image
-              .category__title Соусы
-
+          #categories
+          script(id="categories-template" type="text/x-handlebars-template")
+            |{{#each categories}}
+            .category(data-id="{{id}}")
+              .category__body
+                img(src="{{img}}").category__image
+                .category__title {{title}}
+            |{{/each}}
     .container
        +b.row
         +e.col._a_12
-          +b.product
-            +e.body
-              +e.image
-                img(src="images/p1.png")
-              +e.title Товар
-              +e.description 
-                Текст этот, несмотря на название, не имеет никакого отношения к обитателям водоемов. Используется он веб-дизайнерами для вставки
-              +e.price 300 руб.
-              .btn В карзину
-          +b.product
-            +e.body
-              +e.image
-                img(src="images/p2.png")
-              +e.title Товар
-              +e.description
-                Текст этот, несмотря на название, не имеет никакого отношения к обитателям водоемов. Используется он веб-дизайнерами для вставки
-              +e.price 300 руб.
-              .btn В карзину
-          +b.product
-            +e.body
-              +e.image
-                img(src="images/p3.png")
-              +e.title Товар
-              +e.description
-                Текст этот, несмотря на название, не имеет никакого отношения к обитателям водоемов
-              +e.price 300 руб.
-              .btn В карзину
-          +b.product
-            +e.body
-              +e.image
-                img(src="images/p4.png")
-              +e.title Товар
-              +e.description
-                Текст этот, несмотря на название, не имеет никакого отношения к обитателям водоемов. Используется он веб-дизайнерами для вставки
-              +e.price 300 руб.
-              .btn В карзину
-
-          +b.product
-            +e.body
-              +e.image
-                img(src="images/p1.png")
-              +e.title Товар
-              +e.description
-                Текст этот, несмотря на название, не имеет
-              +e.price 300 руб.
-              .btn В карзину
-          +b.product
-            +e.body
-              +e.image
-                img(src="images/p2.png")
-              +e.title Товар
-              +e.description
-              +e.price 300 руб.
-              .btn В карзину
-          +b.product
-            +e.body
-              +e.image
-                img(src="images/p3.png")
-              +e.title Товар
-              +e.description
-                Текст этот, несмотря на название, не имеет никакого отношения к обитателям водоемов. Используется он веб-дизайнерами для вставки
-              +e.price 300 руб.
-              .btn В карзину
-          +b.product
-            +e.body
-              +e.image
-                img(src="images/p4.png")
-              +e.title Товар
-              +e.description
-                Текст этот, несмотря на название, не имеет никакого отношения к обитателям водоемов. Используется он веб-дизайнерами для вставки
-              +e.price 300 руб.
-              .btn В карзину
-  .container
-    +b.row
-      +e.col._a_10._a_offset_1
+          #products
+          script(id="products-template" type="text/x-handlebars-template")
+            |{{#each products}}
+            +b.product(data-category-id="{{categoryID}}")
+              +e.body
+                +e.image
+                  img(src="{{img}}")
+                +e.title {{title}}
+                +e.description {{description}}
+                +e.price {{price}} руб.
+                .btn(data-id="{{id}}") В карзину
+            |{{/each}}

@@ -1,181 +1,124 @@
 $ ->
 
-  data =
-    'name': 'Название магазина'
-    'categories': [
-        {
-          'id': 1 
-          'title': 'Категория 1'
-          'img': ''
-        }
-        {
-          'id': 2
-          'title': 'Категория 2'
-          'img': ''
-        }
-        {
-          'id': 3
-          'title': 'Категория 3'
-          'img': ''
-        }
-        {
-          'id': 4
-          'title': 'Категория 4'
-          'img': ''
-        }
-        {
-          'id': 5
-          'title': 'Категория 5'
-          'img': ''
-        }
-    ]
-    'products': [
-      { 
-        'id': 1
-        'title': 'Товар 1'
-        'price': 100
-        'img': ''
-        'categoryID': 1
-      }
-      {  
-        'id': 2
-        'title': 'Товар 2'
-        'price': 400
-        'img': ''
-        'categoryID': 1
-      }
-      {  
-        'id': 3
-        'title': 'Товар 3'
-        'price': 200
-        'img': ''
-        'categoryID': 1
-      }
-      {  
-        'id': 4
-        'title': 'Товар 3'
-        'price': 200
-        'img': ''
-        'categoryID': 1
-      }
-      {  
-        'id': 5
-        'title': 'Товар 3'
-        'price': 200
-        'img': ''
-        'categoryID': 1
-      }
-    ]
+  API_URL = 'http://aleksandr-sazhin.myjino.ru'
 
-  class Categories
-    items = {}
+  class Collection
     constructor : (_items) ->
+      @items = []
       if _items and typeof _items is 'object'
-        items = _items
+        @items = _items[..]
 
     getById: (_id) ->
       id = (parseInt _id) || 0
       item = undefined
-      $.each items, ->
-        if this.id is id
-          item = this
+      $.each @items, ->
+        if +@.id is id
+          item = @
           false
       
       obj = {}
+
       for key of item
         obj[key] = item[key]
       obj
 
-    getAll: ->
-      items
+    getBy: (_key, _value)->
+      key = _key || 'id'
+      value = _value || 0
 
-
-  class Products
-    items = {}
-    constructor : (_items) ->
-      if _items and typeof _items is 'object'
-        items = _items
-    getById: (_id) ->
-      id = (parseInt _id) || 0
-      item = undefined
-      $.each items, ->
-        if this.id is id
-          item = this
-          false
-
-      obj = {}
-      for key of item
-        obj[key] = item[key]
+      obj = []
+      $.each @items, ->
+        if +@[key] is value
+          obj.push @
+          
       obj
-
-    getAll: ->
-      items
-
-  class Cart
-    items = {}
-    sum = 0
-    constructor : () ->
-      _arr = localStorage.getItem('cart.items')
-
-      if _arr != '' and _arr != null
-        $.each _arr.split(';'), () ->
-          arr = this.split ':'
-          items[arr[0]] = arr[1]
-
-    getItems: ->
-      items
-
-    getSum: ->
-      sum
-
-    add: (_id, _callback) ->
-      if items[_id] != undefined
-        items[_id] = parseInt items[_id] + 1
-      else 
-        items[_id] = 1
-
-      this.update(_callback)
-
-    remove: (_id, _callback) ->
-      console.log parseInt items[_id]
-      if (parseInt items[_id]) != 1
-        items[_id] = parseInt items[_id] - 1
-      else 
-        delete items[_id]
-
-      this.update(_callback)
-
-    clean: (_id, _callback) ->
-      if _id != ''
-        delete items[_id]
-      else 
-        items = {}
-      this.update(_callback)
-
-    update: (_callback) ->
-      str = ''
-      sum = 0
-
-      $.each items, (_key, _value) ->
-        if str == ''
-          str = "#{_key}:#{_value}"
-        else
-          str = "#{str};#{_key}:#{_value}"
-
-        item = app.products.getById _key
-
-        sum = sum + parseInt item.price * parseInt _value
-
-      localStorage.setItem 'cart.items', str 
-
-      if _callback and typeof _callback is 'function'
-        _callback()
 
   class App
+    constructor : (_data) ->
 
-    сart: new Cart 
-    products: new Products data.products
-    categories: new Categories data.categories
+      self = this
+      @products = new Collection _data.products
+      @categories = new Collection _data.categories
+
+      @cart = {
+        items: {}
+        sum: 0
+
+        run: ->
+          arr = localStorage.getItem('cart.items')
+          if arr != '' and arr != null
+            items = {}
+
+            $.each arr.split(';'), () ->
+              arr = @.split ':'
+              item = self.products.getById arr[0]
+              if item.id
+                items[arr[0]] = parseInt arr[1]
+
+            @items = items
+
+          @update()
+
+        add: (_id, _callback) ->
+          if @items[_id] != undefined
+            @items[_id] = parseInt @items[_id] + 1
+          else 
+            @items[_id] = 1
+
+        remove: (_id, _callback) ->
+          if (parseInt @items[_id]) != 1
+            @items[_id] = parseInt @items[_id] - 1
+          else 
+            delete @items[_id]
+
+        clean: (_id, _callback) ->
+          if _id != ''
+            delete @items[_id]
+          else 
+            @items = {}
+
+        render: ->
+          items = []
+          $.each @items, (_key, _value) ->
+            item = self.products.getById _key
+            item.quantity = _value
+            item.price = parseInt item.price * parseInt _value
+            items.push item
+
+          _data = {
+            items: items
+            sum: @.sum
+          }
+          template = Handlebars.compile $('#cart-template').html()
+          $('#cart').html template(_data)
+          
+          if !!@.sum
+            $('.cart-val').text "#{@.sum} руб."
+          else
+             $('.cart-val').text ''
+
+        update: (_callback) ->
+          str = ''
+          sum = 0
+          $.each @items, (_key, _value) ->
+            item = self.products.getById _key
+            if item.id
+              if str is ''
+                str = "#{_key}:#{_value}"
+              else
+                str = "#{str};#{_key}:#{_value}"
+              sum = sum + parseInt item.price * parseInt _value
+          
+          @sum = sum
+          localStorage.setItem 'cart.items', str
+
+          @render()
+
+          if _callback and typeof _callback is 'function'
+            _callback()
+      }
+
+      @cart.run() 
 
     render: (_selector, _template, _data, _callback) ->
       template = Handlebars.compile $(_template).html()
@@ -185,7 +128,59 @@ $ ->
         _callback()
       return
 
-  app = new App
+  $.getJSON("#{API_URL}/api/get-catalog").done (data)->
+
+    app = new App data
+
+    app.render '#categories', '#categories-template', data, ->
+      app.render '#products', '#products-template', data, ->
+        $first = $ '.category:first'
+        categoryID = $first.data 'id'
+        $first.addClass 'category_active'
+        $('.product').removeClass 'product_active'
+        $("[data-category-id=#{categoryID}]").addClass 'product_active'
+
+    $('body').on 'click', '.category', ->
+      $this = $ this
+      categoryID = $this.data 'id'
+      $('.category').removeClass 'category_active'
+      $this.addClass 'category_active'
+      $('.product').removeClass 'product_active'
+      $("[data-category-id=#{categoryID}]").addClass 'product_active'
+
+    $('body').on 'click', '.btn', ->
+      $this = $ this
+      id = $this.data 'id'
+      app.cart.add parseInt id
+      app.cart.update()
+      setTimeout (->
+        $('.cart__icon').animate {
+          left: "-40px"
+        }, 200
+      ), 100
+
+      $('.cart__icon').animate {
+        left: "-50px"
+      }, 100, ->
+
+    $('body').on 'click', '.cart__plus', ->
+      $this = $ this
+      id = $this.data 'id'
+      app.cart.add parseInt id
+      app.cart.update()
+    
+    $('body').on 'click', '.cart__minus', ->
+      $this = $ this
+      id = $this.data('id')
+      app.cart.remove parseInt id
+      app.cart.update()
+
+    $('body').on 'click', '.cart__clean', ->
+      $this = $ this
+      id = $this.data('id')
+      app.cart.clean parseInt id
+      app.cart.update()
+
 
   $('.cart__icon').click ->
     $('.cart').toggleClass 'cart_active'
