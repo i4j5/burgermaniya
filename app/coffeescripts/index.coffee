@@ -1,3 +1,21 @@
+"use strict"
+
+createBodyScroll = ->
+  $('body').css 'overflow-y','auto'
+  $('body').niceScroll
+    cursorborder: '0'
+    cursorcolor: '#9d9d9d'
+    scrollspeed: 200
+    mousescrollstep: 20
+    cursorwidth: '4px'
+    cursorborderradius: '0px'
+    zindex: 5000
+    console.log "123"
+
+removeBodyScroll = ->
+  $('body').getNiceScroll().remove()
+  $('body').css 'overflow-y','hidden'
+
 $ ->
 
   API_URL = 'http://aleksandr-sazhin.myjino.ru'
@@ -126,7 +144,21 @@ $ ->
 
       if _callback and typeof _callback is 'function'
         _callback()
-      return
+      return 
+
+  createBodyScroll()
+  $('.cart__body').niceScroll
+    cursorborder: '0'
+    cursorcolor: '#9d9d9d'
+    scrollspeed: 100
+    mousescrollstep: 25
+    cursorwidth: '4px'
+    cursorborderradius: '0px'
+    oneaxismousemode: false
+    cursordragontouch: true
+    rtlmode: false
+    horizrailenabled: false
+    zindex: 7000
 
   $.getJSON("#{API_URL}/api/get-catalog").done (data)->
 
@@ -154,6 +186,7 @@ $ ->
       if !app.cart.sum
         $('.cart').addClass 'cart_active'
         $('body').addClass 'cart-open'
+        removeBodyScroll()
       # else
       #   setTimeout (->
       #     $('.cart__icon').animate {
@@ -167,8 +200,6 @@ $ ->
         
       app.cart.add parseInt id
       app.cart.update()
-
-
 
     $('body').on 'click', '.cart__plus', ->
       $this = $ this
@@ -188,16 +219,21 @@ $ ->
       app.cart.clean parseInt id
       app.cart.update()
 
-
   $('.cart__icon').click ->
-    $('.cart').removeClass 'cart_active'
-    $('.cart').addClass 'cart_active'
+    if !$('.cart').hasClass 'cart_active'
+      $('.cart').addClass 'cart_active'
+      $('body').addClass 'cart-open'
+      removeBodyScroll()
+    else
+      $('.cart').removeClass 'cart_active'
+      $('body').removeClass 'cart-open'
+      createBodyScroll()
     # $('.cart').toggleClass 'cart_active'
-    $('body').addClass 'cart-open'
 
   $('.cart__bg').click ->
     $('.cart').removeClass 'cart_active'
     $('body').removeClass 'cart-open'
+    createBodyScroll()
     
 
   # app.render '#categories', '#category-template', data, ->
@@ -298,3 +334,7 @@ $ ->
   #         item.price = parseInt item.price * parseInt _value
   #         dataCart.items.push item
   #       app.render '#cart', '#cart-template', dataCart, ->
+  #       
+  #       
+  $(window).scroll (e)->
+    # e.preventDefault()

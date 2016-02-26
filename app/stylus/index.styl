@@ -56,7 +56,6 @@
   // margin-top 5px
   color #000
  
-
 .cart-open
   overflow-y hidden
   
@@ -70,6 +69,11 @@
   height 100%
   // min-height 300px
   transition all .2s linear
+  &_active
+    right 0
+    .cart__bg
+      visibility visible
+      opacity .6
   &__image
     width 40px
     margin-right 8px
@@ -162,11 +166,6 @@
     transition all .2s linear
     opacity 0
     visibility hidden
-  &_active
-    right 0
-    .cart__bg
-      visibility visible
-      opacity .6
   &__icon
     width 60px
     height 50px
@@ -183,7 +182,7 @@
     border-top-left-radius 2px
     border-bottom-left-radius 2px
     z-index 50
-  &__body
+  &__body  
     z-index 100
     padding 0px 10px
     position relative
@@ -299,6 +298,7 @@
 @require "mixins/placeholder.styl"
 .form
   margin-top 15px
+  margin-bottom 8px
   background-color #fff
   padding 10px 15px
   border-radius 2px
