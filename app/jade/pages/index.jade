@@ -18,20 +18,31 @@ block body
       +b.row
         +e.col._a_12._b_12
           .offer Доставка суши <br>по Москве за 49 минут
-  +b.cart
+  +b.cart._null
     +e.bg
     +e.icon 
     +e.body
       +b.row
         +e.col._a_12
           #cart
+          +b('form').form
+            +e.title Оформить заказ
+            +e('input').input(type="text" name="phone" placeholder="Телефон")
+            +e('input').input(type="text" name="" placeholder="Количество персон")
+            +e('textarea').textarea(rows="2" name="adress" placeholder="Адрес")
+            +e.btn(type="submit") Заказать
           script(id="cart-template" type="text/x-handlebars-template")
+            .cart__header Ваша казина
             |{{#each items}}
             .cart__item
               +b.row
                 .cart__clean(data-id="{{id}}")
                 +e.col._a_6
+                  |{{#if img}}
                   img(src="{{img}}").cart__image
+                  |{{else}}
+                  .cart__image
+                  |{{/if}}
                   .cart__title
                     |{{title}}
                 +e.col._a_6
@@ -50,12 +61,6 @@ block body
             |{{#if sum}}
             .cart__total
               |итого: {{sum}} руб.
-            +b.form
-              +e.title Оформить заказ
-              +e('input').input(type="text" name="phone" placeholder="Телефон")
-              +e('input').input(type="text" name="" placeholder="Количество персон")
-              +e('textarea').textarea(rows="2" name="adress" placeholder="Адрес")
-              +e.btn(type="submit") Заказать
             |{{/if}}
 
   .title Наше меню
@@ -68,7 +73,11 @@ block body
             |{{#each categories}}
             .category(data-id="{{id}}")
               .category__body
+                |{{#if img}}
                 img(src="{{img}}").category__image
+                |{{else}}
+                .category__image
+                |{{/if}}
                 .category__title {{title}}
             |{{/each}}
     .container
@@ -79,10 +88,14 @@ block body
             |{{#each products}}
             +b.product(data-category-id="{{categoryID}}")
               +e.body
+                |{{#if img}}
                 +e.image
                   img(src="{{img}}")
+                |{{else}}
+                +e.image
+                |{{/if}}
                 +e.title {{title}}
-                +e.description {{description}}
+                +e.description {{{description}}}
                 +e.price {{price}} руб.
                 .btn(data-id="{{id}}") В карзину
             |{{/each}}

@@ -67,13 +67,24 @@
   right -280px
   width 280px
   height 100%
-  // min-height 300px
   transition all .2s linear
+  &_null
+    right -320px
   &_active
     right 0
     .cart__bg
       visibility visible
       opacity .6
+  &__header
+    // margin-bottom 10px
+    padding 5px 0 4px 0
+    text-align center
+    line-height 1.1em
+    font-size 18px
+    font-weight 900
+    // background-color #fdfdfd
+    // border-bottom-right-radius 2px
+    // border-bottom-left-radius 2px
   &__image
     width 40px
     margin-right 8px
@@ -88,7 +99,7 @@
   &__quantity
     display table
     // margin auto
-    margin-top 8px
+    margin-top 5px
   &__quantity-val
     float left
     text-align center
@@ -110,6 +121,9 @@
     display inline-block
     width 20px
     height 20px
+    transition all .2s linear
+    &:hover
+      opacity 0.8
   &__minus
     opacity 0.5
     cursor pointer
@@ -120,6 +134,8 @@
     display inline-block
     width 20px
     height 20px
+    &:hover
+      opacity 0.8
   &__price
     text-align center
     font-size 14px
@@ -129,12 +145,12 @@
       font-size 10px
   &__item
     padding 10px
-    margin 5px 0
+    margin 2px 0
     position relative
     background #fff
     border-radius 2px
   &__clean
-    opacity 0.5
+    opacity 0.4
     cursor pointer
     background-image url(../images/clean.png)
     background-repeat no-repeat
@@ -146,13 +162,15 @@
     top 3px
     right 3px
     z-index 300
+    &:hover
+      opacity 0.8
   &__total
     text-align center
     font-weight 15px
     line-height 1em
     font-weight 900
     padding 10px
-    margin 5px 0
+    // margin 3px 0
     position relative
     background #fff
     border-radius 2px
@@ -173,7 +191,7 @@
     top 50%
     margin-top -20px
     left -40px
-    background-color #eee
+    background-color #ECECEC
     background-image url(../images/cart.png)
     background-repeat no-repeat
     background-position 8px center
@@ -188,26 +206,30 @@
     position relative
     width 100%
     height 100%
-    background #eee
+    background #ECECEC
     overflow-y auto
 
 .btn
   display inline-block
   font-size 14px
   line-height 1em
-  padding .8em 2em
-  background #D64D4D
+  padding .8em 15px .8em 40px
+  background-color #D64D4D
+  background-image url(../images/btn.png)
+  background-repeat no-repeat
+  background-position 11px center
   color #fff
   border-radius 2px
-  transition all .2s linear
+  transition all .1s linear
   cursor pointer
   &:hover
-    background #CA2020
+    background-color #CA2020
+  &:active
+    background-color #A02626
   
- .catalog
-   text-align center 
-   margin-bottom 50px
-
+.catalog
+ text-align center 
+ margin-bottom 50px
 
 @keyframes product_active
   0%
@@ -294,7 +316,6 @@
     .category__title
       color #D64D4D
   
-
 @require "mixins/placeholder.styl"
 .form
   margin-top 15px
@@ -306,7 +327,7 @@
     margin 5px 0 15px 0
     text-align center
     line-height 1.1em
-    font-size 18px
+    font-size 17px
     font-weight 900
   &__input
   &__textarea
@@ -321,7 +342,7 @@
     font-weight 300
     color #000
     border 1px solid #eee
-    background-color #f8f8f8
+    background-color #fdfdfd
     border-radius 2px
     margin-bottom 5px
     font-size 14px
@@ -329,8 +350,9 @@
       color #252525
     &:focus
       outline none     
-  // &__input
-  //   // height 30px
+  &__input
+    &_error
+      border-color #D64D4D
   // &__textarea
   //   // height 50px
   &__btn
