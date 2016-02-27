@@ -1,15 +1,20 @@
 .header
-  height 500px
+  height 450px
   width 100%
   background-color #fff
   background-image url(../images/bg.jpg)
   background-repeat no-repeat
   background-position bottom center
   margin-bottom 50px
+  
+.footer
+  width 100%
+  padding 10px 0
+  background-color #4a4a4a
 
 .title
   text-align center
-  font-size 35px 
+  font-size 30px 
   color #000
   line-height 1.2em
   margin-bottom 10px
@@ -74,10 +79,10 @@
     right 0
     .cart__bg
       visibility visible
-      opacity .6
+      opacity .6z
   &__header
     // margin-bottom 10px
-    padding 5px 0 4px 0
+    padding 5px 0 8px 0
     text-align center
     line-height 1.1em
     font-size 18px
@@ -112,7 +117,7 @@
     span
       font-size 10px
   &__plus
-    opacity 0.5
+    opacity 0.4
     cursor pointer
     background-image url(../images/plus.png)
     background-repeat no-repeat
@@ -123,9 +128,9 @@
     height 20px
     transition all .2s linear
     &:hover
-      opacity 0.8
+      opacity 0.6
   &__minus
-    opacity 0.5
+    opacity 0.4
     cursor pointer
     background-image url(../images/minus.png)
     background-repeat no-repeat
@@ -135,7 +140,7 @@
     width 20px
     height 20px
     &:hover
-      opacity 0.8
+      opacity 0.6
   &__price
     text-align center
     font-size 14px
@@ -150,7 +155,7 @@
     background #fff
     border-radius 2px
   &__clean
-    opacity 0.4
+    opacity 0.3
     cursor pointer
     background-image url(../images/clean.png)
     background-repeat no-repeat
@@ -162,8 +167,9 @@
     top 3px
     right 3px
     z-index 300
+    transition all .2s linear
     &:hover
-      opacity 0.8
+      opacity 0.5
   &__total
     text-align center
     font-weight 15px
@@ -182,7 +188,7 @@
     height 100%
     background #000
     transition all .2s linear
-    opacity 0
+    opacity .5
     visibility hidden
   &__icon
     width 60px
@@ -320,7 +326,7 @@
 .form
   margin-top 15px
   margin-bottom 8px
-  background-color #fff
+  background-color #4a4a4a
   padding 10px 15px
   border-radius 2px
   &__title
@@ -329,6 +335,7 @@
     line-height 1.1em
     font-size 17px
     font-weight 900
+    color #fff
   &__input
   &__textarea
   &__btn
@@ -341,7 +348,7 @@
     width 100%
     font-weight 300
     color #000
-    border 1px solid #eee
+    border 1px solid #333
     background-color #fdfdfd
     border-radius 2px
     margin-bottom 5px
@@ -352,18 +359,19 @@
       outline none     
   &__input
     &_error
-      border-color #D64D4D
+      background-color #FBDDDD
   // &__textarea
   //   // height 50px
   &__btn
     // margin-top -2px
     font-size 15px
-
     border 0
     background #D64D4D
     color #fff
     transition all .2s linear
     cursor pointer
     &:hover
-      background #CA2020
+      background-color #CA2020
+    &:active
+      background-color #A02626
       
