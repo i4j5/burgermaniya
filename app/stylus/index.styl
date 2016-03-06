@@ -32,7 +32,7 @@
   img
     float left
     width 40px
-    margin-right 10px
+    margin-right 4px
   &__description
     font-size 12px
     line-height 1.2em
@@ -52,6 +52,16 @@
   font-size 20px
   line-height 30px
   font-weight 900
+ 
+ .schedule
+ 	display table
+ 	margin auto
+ 	font-size 13px
+ 	line-height 1em
+ 	color #000
+  padding-left 35px
+ 	text-align left
+ 	margin-top 5px
    
 .offer
   text-align center
@@ -99,7 +109,7 @@
     margin-top 5px
     font-size 14px
     line-height 1.1em
-    font-weight 300
+    font-weight 500
     text-align center
   &__quantity
     display table
@@ -146,6 +156,7 @@
     font-size 14px
     line-height 1.05em
     margin-top 10px
+    font-weight 300
     span
       font-size 10px
   &__item
@@ -174,7 +185,7 @@
     text-align center
     font-weight 15px
     line-height 1em
-    font-weight 900
+    font-weight 500
     padding 10px
     // margin 3px 0
     position relative
@@ -228,6 +239,7 @@
   border-radius 2px
   transition all .1s linear
   cursor pointer
+  font-weight 500
   &:hover
     background-color #CA2020
   &:active
@@ -280,7 +292,7 @@
     margin-bottom 10px
     text-align left 
     font-size 13px
-    font-weight 400
+    font-weight 200
     line-height 1.2em
     color #565656
     height 90px
@@ -309,7 +321,7 @@
   &__title
     text-align center 
     font-size 16px
-    font-weight 900
+    font-weight 400
     line-height 20px
     display inline-block
   &__image
@@ -326,7 +338,7 @@
 .form
   margin-top 15px
   margin-bottom 8px
-  background-color #4a4a4a
+  background-color #fff
   padding 10px 15px
   border-radius 2px
   &__title
@@ -335,7 +347,7 @@
     line-height 1.1em
     font-size 17px
     font-weight 900
-    color #fff
+    color #000
   &__input
   &__textarea
   &__btn
@@ -348,13 +360,13 @@
     width 100%
     font-weight 300
     color #000
-    border 1px solid #333
-    background-color #fdfdfd
+    border 1px solid #C4C4C4
+    background-color #F2F2F2
     border-radius 2px
     margin-bottom 5px
     font-size 14px
     +placeholder()
-      color #252525
+      color #a4a4a4
     &:focus
       outline none     
   &__input
@@ -370,6 +382,7 @@
     color #fff
     transition all .2s linear
     cursor pointer
+    font-weight 500
     &:hover
       background-color #CA2020
     &:active

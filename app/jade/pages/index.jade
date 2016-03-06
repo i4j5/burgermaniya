@@ -9,12 +9,13 @@ block body
         +e.col._a_12._c_4
           .logo
             img(src="images/logo.png")
-            |Дом 
+            |Мой 
             span Бургер
             //- .logo__description Доставка суши по Самаре
         +e.col._a_12._c_4
         +e.col._a_12._c_4
           .phone 8 (914) 432-18-18
+          .schedule Доставка с 10.00 до 01.00
       +b.row
         +e.col._a_12._b_12
           .offer Доставка еды на дом <br>в Москве за 49 минут
@@ -29,6 +30,7 @@ block body
             +e.title Оформить заказ
             +e('input').input(type="text" name="phone" placeholder="Телефон")
             +e('input').input(type="text" name="" placeholder="Количество персон")
+            +e('input').input(type="text" name="" placeholder="Подготовить сдачу")
             +e('textarea').textarea(rows="2" name="adress" placeholder="Адрес")
             +e.btn(type="submit") Заказать
           script(id="cart-template" type="text/x-handlebars-template")

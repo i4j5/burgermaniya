@@ -210,7 +210,7 @@ $ ->
         $('.cart__icon').animate {
           left: "-50px"
         }, 100, ->
-        
+
       app.cart.add parseInt id
       app.cart.update()
 
