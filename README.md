@@ -1,1 +1,1 @@
-# Stub to start a new front-end project
+# Food delivery

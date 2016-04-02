@@ -2,7 +2,7 @@
 /app/public/javascripts
 /app/public/stylesheets
 /app/public/**/*.html
-
 /build
-
 /node_modules
+/npm-debug.log
+/server/npm-debug.log

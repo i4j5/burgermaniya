@@ -16,7 +16,7 @@ removeBodyScroll = ->
   $('body').getNiceScroll().remove()
   $('body').css 'overflow-y','hidden'
 
-API_URL = 'http://aleksandr-sazhin.myjino.ru'
+API_URL = 'http://localhost:3008/'
 
 class Collection
   constructor : (_items) ->

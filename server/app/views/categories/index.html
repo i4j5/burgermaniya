@@ -1,0 +1,21 @@
+{% extends "templates/admin.html" %}
+
+{% block content %}
+
+<p>
+  <a href="/categories/created">Добавить</a>
+</p>
+{% for category in categories %}
+    <p>
+        <img src="/_/{{ category.image }}">
+    </p>
+    <p> {{ category.title }} </p>
+    <a href="/categories/edit/{{ category.id }}">Редактировать</a>
+    <br>
+    <a href="/categories/delete/{{ category.id }}">Удалить</a>
+    <hr>
+{% else %}
+    No categories
+{% endfor %}
+
+{% endblock %}

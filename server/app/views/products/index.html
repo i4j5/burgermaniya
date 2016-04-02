@@ -1,0 +1,23 @@
+{% extends "templates/admin.html" %}
+
+{% block content %}
+
+<p>
+  <a href="/products/created">Добавить</a>
+</p>
+{% for product in products %}
+    <p>
+        <img src="/_/{{ product.image }}">
+    </p>
+    <p> Название: {{ product.title }} </p>
+    <p> Описание: {{ product.description }} </p>
+    <p> Цена: {{ product.price }} </p>
+    <a href="/products/edit/{{ product.id }}">Редактировать</a>
+    <br>
+    <a href="/products/delete/{{ product.id }}">Удалить</a>
+    <hr>
+{% else %}
+    No products
+{% endfor %}
+
+{% endblock %}

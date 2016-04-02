@@ -7,6 +7,9 @@
     "type": "git",
     "url": "https://github.com/i4j5/front-end.git"
   },
+  "scripts": {
+    "server": "php -S localhost:3008 -t server/"
+  },
   "license": "MIT",
   "devDependencies": {
     "gulp": "~3.9.0",
